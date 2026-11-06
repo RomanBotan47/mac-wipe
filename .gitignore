@@ -1,0 +1,13 @@
+/build/
+/.DS_Store
+**/.DS_Store
+/.env
+/.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.mobileprovision
+*.log
+__pycache__/
+*.pyc

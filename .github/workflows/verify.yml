@@ -1,0 +1,54 @@
+name: verify
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: verify (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build universal application
+        run: ./build.sh
+      - name: Check safety mechanisms
+        run: python3 scripts/test-safety.py
+      - name: Check public files and binary
+        run: python3 scripts/check-public-files.py
+
+  release:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: verify
+    runs-on: macos-15
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: ./build.sh
+      - run: python3 scripts/check-public-files.py
+      - run: ./scripts/package.sh
+      - name: Publish versioned downloads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" build/release/* \
+            --repo "$GITHUB_REPOSITORY" --verify-tag \
+            --title "Протереть Mac $GITHUB_REF_NAME" \
+            --notes "Универсальная сборка для macOS 13+, Apple Silicon и Intel. DMG, ZIP и SHA-256. Инструкция установки, сведения о локальной ad-hoc подписи и приватности — в README."

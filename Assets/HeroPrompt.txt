@@ -1,0 +1,10 @@
+Method: built-in GPT Image; transparent PNG.
+Reference: Протереть Mac — тёплый интерфейс AUTOMATO.png.
+
+Use case: product-mockup.
+Asset type: a transparent PNG illustration used in the top right of a real native macOS app.
+Input image 1 is a reference for the photographic vignette only, not an edit target.
+Create only the small product scene seen in the top right of that reference: an open dark silver slim MacBook-style laptop with a completely black screen and one delicate golden four-point sparkle, a vivid golden-yellow microfiber cleaning cloth folded over its front right corner, a single fan-shaped golden ginkgo leaf standing behind the laptop, and a low warm ivory travertine pedestal underneath.
+Match the reference's premium warm editorial photography, realistic soft cloth fibers, veined leaf, and stone texture. Soft natural light from upper left. Front three-quarter angle; screen faces the viewer, laptop recedes to the right.
+Composition: square image, scene occupies the right 85 percent and stays entirely within the canvas with generous transparent edge padding. Keep the left edge airy so it can overlap a warm cream app background. The pedestal is short and subordinate, not a tall block. Gentle soft natural contact shadow, fully transparent background around all objects. No wall, no opaque backdrop, no white rectangle.
+This is ONE isolated decorative asset, not an app screenshot. Do not include any user interface, window frame, buttons, text, lettering, logos, Apple marks, or watermarks. Photorealistic product illustration.
